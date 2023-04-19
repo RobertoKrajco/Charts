@@ -1,64 +1,111 @@
 ﻿
+#Real - time Chart Application
 
-Real - time Dashboard Application
-
-This is a sample application that demonstrates how to create real-time dashboards using C#, React, Entity Framework, and SignalR. 
+This is a sample application that demonstrates how to create real-time dashboards using C#, React, Entity Framework, Devextreme and SignalR. 
 The application retrieves data from an MSSQL database and displays it on a dashboard in real-time or simulates it.
 How to Run the Application
 Prerequisites
 
-    .NET 5 SDK
-    Node.js and npm
-    MSSQL Server
+    .NET 7 SDK
+    Node.js 12 or later and npm
+    MSSQL Server: 18
+    DevExtreme: 22.2.5
+    React: 18.2.0
 
-Steps
+##Steps to reproduce solution
 
     Clone the repository to your local machine.
     Open a terminal and navigate to the project's root directory.
     Restore the backend dependencies by running the following command:
 
-dotnet restore
+	dotnet restore
 
     Build the backend by running the following command:
 
-dotnet build
+	dotnet build
 
     Run the backend by running the following command:
 
-arduino
-
-dotnet run
+	dotnet run
 
     Open a new terminal window and navigate to the project's client directory.
     Install the frontend dependencies by running the following command:
 
-npm install
+	npm install
 
     Start the frontend development server by running the following command:
 
-sql
-
-npm start
+	npm start
 
     Open your web browser and navigate to http://localhost:44438 to access the application.
 
-How to Use the Charts/Dashboards
+##Steps to run application
 
-The application contains several charts and dashboards that display real-time or simulated data. 
-The charts and dashboards can be accessed by clicking on the links in the navigation bar.
-Real-Time Charts/Dashboards
+	In my repository
+		https://github.com/RobertoKrajco/Charts.git
+	is zip file called export.zip 
+	- extract this file and change myDB connection string inside appsettings.json
+	- execute Infotech-web.exe
+	- now open your browser and type in http://localhost:5000
+
+##Connecting to Database
+Connection string that defines connection to database is located in 
+	appsetting.json 
+	"myDB": "Server=DESKTOP-SJCHPU7;Database=TutorialDB;TrustServerCertificate=true;Trusted_Connection=True;"
+I used trusted connection since i didnt feel the urge to secure connection in local development.
+
+
+Here i am providing structure and commands to manipulate with database:
+
+CREATE TABLE [TutorialDB].[dbo].[MonthlyRevenue]
+(
+   RevenueId INT IDENTITY(1,1) PRIMARY KEY,
+   Country VARCHAR(50) NOT NULL,
+   MonthYear DATE NOT NULL,
+   Revenue DECIMAL(18,2) NOT NULL
+)
+INSERT INTO [TutorialDB].[dbo].[MonthlyRevenue] (Country, MonthYear, Revenue)
+VALUES ('USA', '2022-01-01', 100000.00),
+       ('USA', '2022-02-01', 150000.00),
+       ('Canada', '2022-01-01', 50000.00),
+       ('Canada', '2022-02-01', 75000.00)
+
+INSERT INTO [TutorialDB].[dbo].[MonthlyRevenue] (Country, MonthYear, Revenue)
+VALUES ('Brasil', '2022-06-01', 100000.00)
+
+There is also provided sql_dump for table MonthlyRevenue in this directory.
+
+##How to Use the Charts
+
+The application contains charts that display real-time data. 
+The second will be displayed after element in first chart called "Revenue by Country in 2022" is double-clicked.
+
+###Real-Time Charts
 
 The real-time charts and dashboards display data that is updated in real-time. 
 The data is retrieved from the MSSQL database using Entity Framework and SignalR is used to push updates to the frontend. 
 The charts and dashboards are updated automatically whenever new data is added or updated in the database.
-Simulated Charts/Dashboards
+In this application i used command
+	Scaffold-DbContext "Server=DESKTOP-SJCHPU7;Database=TutorialDB;TrustServerCertificate=true;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Tables MonthlyRevenue
+to generate dbContext and also model MonthlyRevenue.
+
+
+##Design choices and challenges
 
 The simulated charts and dashboards display data that is simulated using a timer. 
-The data is generated randomly and is displayed on the charts and dashboards at regular intervals. 
-The charts and dashboards are updated automatically whenever new data is generated.
-Filtering Data
+The data is fetched from MsSQL database and is displayed on the charts at regular intervals based on whether or not database was updated. 
+The charts and dashboards are updated automatically whenever new data is generated or updated.
 
-The charts and dashboards allow you to filter the data that is displayed. 
-You can filter the data by date, time, or by selecting a specific chart element. 
-To filter the data, simply click on the chart element that you want to filter by. 
-The data displayed on the chart will be updated automatically based on the selected filter.
+The Most challengeing thing in this solution was to create real-time connection with database using SignalR.
+I used React on the frontend because the first thing that came to my mind after reading the assignment was how the charts will communicate.
+It's just a matter of preference, nothing against jQuery. I didn't have to think twice to realize that I will use Entity Framework for ORM, since I used it many times before.
+It would be also great to implement ChartHub with SignalR to detail chart, but i think that applying it to main chart is enough to demonstrate solution.
+
+Hope that application will work on your Computer. If there will be any problems dont hesitate to contact me.
+At this stage i would like to thank you for pretty challanging assignment and looking forward to see you soon.
+
+
+
+
+
+
