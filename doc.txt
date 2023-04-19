@@ -1,0 +1,64 @@
+﻿
+
+Real - time Dashboard Application
+
+This is a sample application that demonstrates how to create real-time dashboards using C#, React, Entity Framework, and SignalR. 
+The application retrieves data from an MSSQL database and displays it on a dashboard in real-time or simulates it.
+How to Run the Application
+Prerequisites
+
+    .NET 5 SDK
+    Node.js and npm
+    MSSQL Server
+
+Steps
+
+    Clone the repository to your local machine.
+    Open a terminal and navigate to the project's root directory.
+    Restore the backend dependencies by running the following command:
+
+dotnet restore
+
+    Build the backend by running the following command:
+
+dotnet build
+
+    Run the backend by running the following command:
+
+arduino
+
+dotnet run
+
+    Open a new terminal window and navigate to the project's client directory.
+    Install the frontend dependencies by running the following command:
+
+npm install
+
+    Start the frontend development server by running the following command:
+
+sql
+
+npm start
+
+    Open your web browser and navigate to http://localhost:44438 to access the application.
+
+How to Use the Charts/Dashboards
+
+The application contains several charts and dashboards that display real-time or simulated data. 
+The charts and dashboards can be accessed by clicking on the links in the navigation bar.
+Real-Time Charts/Dashboards
+
+The real-time charts and dashboards display data that is updated in real-time. 
+The data is retrieved from the MSSQL database using Entity Framework and SignalR is used to push updates to the frontend. 
+The charts and dashboards are updated automatically whenever new data is added or updated in the database.
+Simulated Charts/Dashboards
+
+The simulated charts and dashboards display data that is simulated using a timer. 
+The data is generated randomly and is displayed on the charts and dashboards at regular intervals. 
+The charts and dashboards are updated automatically whenever new data is generated.
+Filtering Data
+
+The charts and dashboards allow you to filter the data that is displayed. 
+You can filter the data by date, time, or by selecting a specific chart element. 
+To filter the data, simply click on the chart element that you want to filter by. 
+The data displayed on the chart will be updated automatically based on the selected filter.
